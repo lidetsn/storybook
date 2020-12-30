@@ -3,7 +3,7 @@ import {composeWithDevTools} from "redux-devtools-extension"
 import thunk from "redux-thunk"
 
 import {userAuthReducer,userReducer} from "./reducers/userAuthReducer"
-import {userStoryReducer} from './reducers/storyReducer'
+import {userStoryReducer,storyReducer,allPostedStoriesReducer,editMyStoryReducer} from './reducers/storyReducer'
 
 const middlewar=[thunk]
 const initialState={}
@@ -13,6 +13,9 @@ const   rootStore=combineReducers({
                                    userAuth:userAuthReducer,
                                    currentUser:userReducer,
                                    userStory:userStoryReducer,
+                                   storyDetail:storyReducer,
+                                   allPostedStories:allPostedStoriesReducer,
+                                   editMyStory:editMyStoryReducer
                                    
                                   
 
