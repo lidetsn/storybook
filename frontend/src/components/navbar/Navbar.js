@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import {useSelector,useDispatch} from "react-redux"
-import {Link } from "react-router-dom"
+import {Link ,NavLink} from "react-router-dom"
 import{getCurrentUser}from "../../actions/authaction"
 
 const Navbar = () => {
@@ -24,24 +24,24 @@ const Navbar = () => {
 const authLinks = (
     <ul className="navbar-nav ml-auto">
        <li className="nav-item">
-        <Link className="nav-link" to="/dashboard">
+        <NavLink className="nav-link" to="/dashboard" activeStyle={{fontWeight: "bold", color: "red" }}>
         Dashboard
-        </Link>
+        </NavLink>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/publicstories">
+        <NavLink className="nav-link" to="/publicstories" activeStyle={{fontWeight: "bold", color: "red" }}>
         Public Stories
-        </Link>
+        </NavLink>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/addstory">
+        <NavLink className="nav-link" to="/addstory" activeStyle={{fontWeight: "bold", color: "red" }}>
           Add story
-        </Link>       
+        </NavLink>       
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/profile">
+        <NavLink className="nav-link" to="/profile" activeStyle={{fontWeight: "bold", color: "red" }}>
           Profile
-        </Link>
+        </NavLink>
       </li>
       <li className="nav-item">
         <a href="/api/logout" className="nav-link">

@@ -1,9 +1,10 @@
 import React from 'react'
+import "./login.css"
 
 
 function Login() {
     return (
-<div className="landing">
+  <div className="landing">
   <div className="dark-overlay landing-inner text-light">
     <div className="container">
       <div className="row">
@@ -34,7 +35,8 @@ function Login() {
        </div>
     </div>
   </div>
-</div>
+  </div>
+
     )
 }
 

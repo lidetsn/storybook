@@ -1,7 +1,7 @@
 import React from 'react'
 import {useSelector} from "react-redux"
 import { Redirect,Route } from 'react-router-dom'
-import Navbar from "../../component/navbar/Navbar"
+import Navbar from "../../components/navbar/Navbar"
 
  
 const PrivateRoute=(props)=> {

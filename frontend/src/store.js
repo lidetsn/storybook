@@ -16,9 +16,7 @@ const   rootStore=combineReducers({
                                    storyDetail:storyReducer,
                                    allPostedStories:allPostedStoriesReducer,
                                    editMyStory:editMyStoryReducer
-                                   
-                                  
-
+                                                                    
                                 })
 const store=createStore(rootStore,initialState,composeWithDevTools(applyMiddleware(...middlewar)))
 

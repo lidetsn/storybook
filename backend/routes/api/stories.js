@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
     // let story = await Story.findById(req.params.id).populate('user').lean()
     let story = await Story.findById(req.params.id)
     let user=await User.findById(story.user)
-
+    
 
     if (!story) {
      // return res.render('error/404')

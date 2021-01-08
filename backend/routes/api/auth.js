@@ -12,11 +12,11 @@ module.exports = app => {
   
 app.get("/auth/users/user", (req,res)=>{
   
-  if(req.isAutenticated()){
-    res.json({isAutenticated:true});
+  if(req.user===undefined){
+    res.json({isAutenticated:false});
 }
 else{
-  res.json({isAutenticated:false});
+  res.json({isAutenticated:true});
 
 }
 })

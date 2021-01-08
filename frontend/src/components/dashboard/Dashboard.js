@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux"
 import {Link} from 'react-router-dom'
 import moment from "moment"
 
-import {getUserStory} from "../../actions/storyAction"
+import {getUserStory,deleteStory} from "../../actions/storyAction"
 import {getCurrentUser} from "../../actions/authaction"
 
 
@@ -23,8 +23,8 @@ function Dashboard() {
          },[])
 
         const handleDelete=(id)=>{
-            console.log("coming soon")
-           // dispatch(deleteStory(id))
+          //  console.log("coming soon")
+           dispatch(deleteStory(id))
             
         }
        

@@ -34,7 +34,7 @@ app.use(passport.session());
 
 
 require("./routes/api/auth.js")(app);
-app.use("/api/posts/",require("./routes/api/postRoutes") )
+// app.use("/api/posts/",require("./routes/api/postRoutes") )
 app.use("/api/stories/",require("./routes/api/stories") )
 
 
