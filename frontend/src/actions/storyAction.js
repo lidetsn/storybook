@@ -94,7 +94,8 @@ const {_id,formFields}=values
 
                   await axios(config)
       
-                        // dispatch({type:"UPDATE_A_STORY_SUCCESS",payload:data})  
+                       //  dispatch({type:"UPDATE_A_STORY_SUCCESS",payload:true})   
+                     //   dispatch( getUserStory())
             
                   
       } catch (error) {

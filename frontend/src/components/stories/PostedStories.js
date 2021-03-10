@@ -1,68 +1,130 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { Link, useHistory } from "react-router-dom"
 import moment from "moment"
-import { truncate, editIcon, stripTags } from "../../helpers/helper"
+
+import { truncate,stripTags } from "../../helpers/helper"
 import Loading from "../Loading/Loading"
-import 'materialize-css';
-import { Card, Row, Col } from 'react-materialize';
 import { getAllPostedStories } from "../../actions/storyAction"
+import classes from "./showStory.module.css"
+
+import ShowStoryNewv from "./ShowStoryNewv"
 
 
 
+const PostedStories=(props) =>{
 
-function PostedStories() {
+            const dispatch = useDispatch()
+            const allPostedStories = useSelector(state => state.allPostedStories)
+            const { postedStories, loading } = allPostedStories
+            // responsiveness
+            const [width, setWidth] =useState(window.innerWidth);
+            const storyDetail=useSelector(state=>state.storyDetail)
+            const {aStory,storyUser}=  storyDetail
+            const [selectedStory,setSelectedStory]=useState("")
 
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const allPostedStories = useSelector(state => state.allPostedStories)
-    const { postedStories, loading } = allPostedStories
-
-    // console.log("======posted=========")
-     console.log(postedStories)
+  
 
 
-    useEffect(() => {
-        dispatch(getAllPostedStories())
+            useEffect(() => {
+                            dispatch(getAllPostedStories())
+                            const handleWindowResize = () => setWidth(window.innerWidth)
+                            window.addEventListener("resize", handleWindowResize);
+                          
+                            // Return a function from the effect that removes the event listener
+                            return () => window.removeEventListener("resize", handleWindowResize);
 
-    }, [])
+                        }, [])
+
+                useEffect(() => {
+                          
+                            getRecentStory()
+
+                        }, [postedStories])
+
+            const getRecentStory=()=>{
+                if(postedStories.length>0 && !loading)
+               {setSelectedStory(postedStories[0])}
+              
+            }
+
+            const getUserStory=(id,uid,story)=>{
+         
+                    if(width>639){
+                            // props.history.replace(`/publicstories/showstory/${id}/${uid}`);
+                            setSelectedStory(story)
+                    }
+                   else{
+         
+                       let readMore=document.getElementById(id).getAttribute("show")
+                       if(readMore==="false"){
+                           const newLink=    document.createElement('a')
+                           newLink.setAttribute("href",`#${id}`)
+                           const newContent = document.createTextNode("RED LESS");
+                           newLink.appendChild(newContent)
+                           document.getElementById(id).innerHTML=story.body
+                           document.getElementById(id).appendChild(newLink)
+
+                           document.getElementById(id).setAttribute("show","true")
+                          }
+                       else{
+                        const newLink=    document.createElement('a')
+                        newLink.setAttribute("href",`#${id}`)
+                        const newContent = document.createTextNode("RED MORE");
+                        newLink.appendChild(newContent)
+                        document.getElementById(id).innerHTML= stripTags(truncate(story.body, 150))
+                        document.getElementById(id).appendChild(newLink)
+
+                     
+                           document.getElementById(id).setAttribute("show","false")
+                           }
+                     }
+               }
+    
+    
     return (
-        <div className="container">
-            {loading ? <Loading /> : <>
-                {postedStories.length !== 0 ? <>
-                    <h4 className="grey-text lighten-3">Stories</h4>
-                    {postedStories.map(story =>
-                    (
-
-                        
-                            <div key={story._id} >
-                                <div className="card-image">
-                                    {/* bring the current user */}
-                                    {/* {editIcon(story.user,currentUser,story._id)} */}
-                                    <h6 className="right-align grey grey-text lighten-1">posted:{moment(story.createdAt).format("MM-DD-YYYY h:mm a")}</h6>
-                                </div>
-                                <div className="left-align">
-                                    <h5 className="grey-text lighten-3">{story.title}</h5>
-                                    {/* <p>{{stripTags (truncate body 150)}}</p> */}
-                                    <p>{stripTags(truncate(story.body, 150))}<b><Link to={`/showstory/${story._id}/${story.user._id}`} >. . .read more</Link> </b></p>
-
-                                    <br />
-                                    <div className="chip">
-                                        <img src={story.user.image} alt="" />
-                                        <a href="/stories/user/{{user._id}}">{story.user.displayName}</a>
+        <div> {loading ? <Loading /> :
+        
+         <div className={classes.PostedStory}>
+             
+               <div className={classes.List} >
+                 
+                        {postedStories.length !== 0 ? <>
+                            <h4 className="grey-text lighten-3">Stories</h4>
+                            {postedStories.map(story => 
+                                (<div key={story._id} className="left-align z-depth-1 ">
+                                     {/* <div className="card-image"> */}
+                                         {/* bring the current user */}
+                                         {/* {editIcon(story.user,currentUser,story._id)} */}
+                                         <h6 className={classes.PostedDate}>posted:{moment(story.createdAt).format("MM-DD-YYYY h:mm a")}</h6>
+                                     {/* </div> */}
+                                    <div >
+                                        <h6 className={aStory._id===story._id?classes.Active:null} >{story.title}</h6>
+                                        <div className={width<639?classes.List:null} onClick={()=>getUserStory(story._id,story.user._id,story)}>
+                                              {<p name={story._id} id={story._id}  show="false" >
+                                                   { stripTags(truncate(story.body, 150))}  <a href={`#${story._id}`} >RED MORE</a>  
+                                              </p>}  
+                                       </div>
+                                         
+                                        <div className="chip">
+                                            <img src={story.user.image} alt="" />
+                                            <a href="/stories/user/{{user._id}}">{story.user.displayName}</a>
+                                        </div>
                                     </div>
-                                </div>
-                                {/* <div className="card-action left-align">
-                                            <Link to={`/showstory/${story._id}`} className="btn grey">Read More</Link>
-                                        </div> */}
-                            </div>
-                    
-                    )
-                    )}
-                </> :
-                    <h4>No stories to display</h4>
-                }</>}
+                                
+                            </div>)
+                           )}
+                     </> :
+                       <h4>No stories to display</h4>
+                    }
 
+             </div>
+             {/* for large device only */}
+                  {width>639 && <div className={classes.Story}>
+                                   
+                    
+                         <ShowStoryNewv story={selectedStory}/>
+                </div>}
+        </div>}
         </div>
     )
 }

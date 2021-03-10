@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import {Link,useHistory} from "react-router-dom"
 
 import 'materialize-css';
@@ -9,6 +9,10 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import {updateAStory} from "../../actions/storyAction"
+import Modal from "../modal/Modal"
+import Confermation from "../modal/confermatios/Confermation"
+import {getUserStory} from "../../actions/storyAction"
+import classes from "./showStory.module.css"
 
 
 
@@ -23,10 +27,13 @@ function EditForm({preloadData}) {
             //         status:preloadData.status
             //       }
            const [formFields,setFormfileds]=useState({title:preloadData.title,body:preloadData.body,status:preloadData.status})
-
+           const [changed,setChanged]=useState(false)
+           const[editConfermed,setEditConfermed]=useState(false)
             //   const {register,handleSubmit}=useForm({
             //            defaultValues:data
             //   })
+            const userStory=useSelector(state=>state.userStory)
+        const {story, isStoryLoading}=userStory
             const dispatch = useDispatch()
 
             // console.log("preload data")
@@ -43,39 +50,61 @@ function EditForm({preloadData}) {
                   e.preventDefault()
                 //   console.log("=========")
                 //   console.log(formFields)
+                if(changed){
                   dispatch(updateAStory({_id:preloadData._id,formFields}))
-                  alert("your story has updated successfully")
-                  history.push("/dashboard")
+                //  history.push("/dashboard")
+                
+                  setEditConfermed(true)
+                }
+                else{
+                    setEditConfermed(true)
+                }
+                //   alert("your story has updated successfully")
+                //   history.push("/dashboard")
                 
             }
+            const confermed=()=>{
+                dispatch(getUserStory())
+               history.push("/dashboard")
+
+            }
             const handleChange=(e)=>{
+                setChanged(true)
                   setFormfileds({...formFields,[e.target.name]:e.target.value})
 
     }
             const handleEditorChange=(event,editor)=>{
-
+                     setChanged(true)
            const edata = editor.getData();       
                setFormfileds({...formFields,body:edata})
             }
  
     return (
-        <div className="container">
-            <h3>Edit Story</h3>
-                <div className="row">
+        <>
+            <Modal show={editConfermed}>
+                {changed?   <Confermation confermed={confermed}
+                                    message="your change has been made successfully"/>:
+                             <Confermation confermed={confermed}
+                                    message="you have not made any change on the story"/>}
+            
+            </Modal>
+        <div>
+            <h5 className={classes.Header}>Edit Story</h5>
+                <div>
                     {/* <form  className="col s12" onSubmit={handleSubmit(onSubmit)}> */}
-                    <form  className="col s12" >
+                    <form>
 
                         {/* <input type="hidden" name="_method" value="PUT"/> */}
-                                <div className="row">
+                                
                                     
-                                    <div className="input-field">
+                                    <div>
                                         {/* <input ref={register} type="text" id="title" name="title" /> */}
-                                        <TextInput label="Title"  type="text" id="title" name="title" value={formFields.title} onChange={handleChange}/>
+                                        <input label="Title"  type="text" id="title" name="title" value={formFields.title} onChange={handleChange}/>
 
                                     </div>
-                                </div>
+                                
 
-                        <div className="row">
+                        
                             
                             <div className="input-field">
                                     {/* <select ref={register}id="status" name="status" value={status} > */}
@@ -89,10 +118,10 @@ function EditForm({preloadData}) {
                                             <option value="private">Private</option>
                                             {/* {{/select}} */}
                                     </Select>
-                            </div>
+                            
                         </div>
 
-                        <div className="row">
+                        <br/><br/>
                                 <div className="input-field">
                                     <h5>Tell Us Your Story:</h5>
                                     {/* <textarea ref={register} id="body" name="body" /> */}
@@ -108,9 +137,9 @@ function EditForm({preloadData}) {
                                       
                                       />
                                 </div>
-                        </div>
+                        
 
-                        <div className="row">
+                        <div >
                             {/* <input type="submit" value="Save" className="btn"/> */}
                             <button  value="Save" className="btn" onClick={handleSubmit}>save</button>
 
@@ -121,6 +150,7 @@ function EditForm({preloadData}) {
                 </div>
             
         </div>
+        </>
     )
     
 }

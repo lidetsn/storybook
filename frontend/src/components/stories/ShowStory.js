@@ -7,29 +7,19 @@ import {Link} from "react-router-dom"
 import Loading from "../Loading/Loading"
 
 import {showAStory} from "../../actions/storyAction"
+import classes from "./showStory.module.css"
 
 
 const ShowStory = (props) => {
     
-        //console.log(match)
-        //const id=match.params.id     
-        //console.log(props)
+       
          const {id}=useParams()
-       console.log(useParams())
-        
-        const dispatch=useDispatch()
-        // const history=useHistory()
-       // console.log("========history===========")
-        // console.log(history)
-        // const id=history.location.state.id
-        
-
-        const storyDetail=useSelector(state=>state.storyDetail)
+    //  console.log(useParams())      
+         const dispatch=useDispatch()
+         const storyDetail=useSelector(state=>state.storyDetail)
          const {aStory,storyUser,loading}=  storyDetail
-            //    console.log("&&&&&&&astory&&&&&&&&&&&&&&&")
-            //    console.log(aStory)
-            //    console.log(storyUser)
-            //    console.log(id)
+         
+            
 
       useEffect(() => {
              dispatch(showAStory(id))
@@ -38,23 +28,22 @@ const ShowStory = (props) => {
                    dispatch({type:"CLEAR"})
               }
             
-         }, [])
+         }, [id])
 
          
     return (
-    
-        
-        <div className="container">
+          
+        <div >
             {loading ?<Loading/>:
-            (<div className="row">
-                <div className="col s12 m8">
+            (<div className={classes.ShowStory}>
+                <div className={props.match.path!=="/dashboard/:id"?classes.Story:null}>
                             <h5 className="grey-text">
                             {aStory.title}
                                 <small>
                                 {/* {{{editIcon story.user user story._id false}}} */}
                                 </small>
                             </h5>
-                        <div className="story">
+                        <div>
                                 <div className="card-content">
                                     <span className="right-alighn grey-text">
                                         {moment(aStory.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
@@ -65,8 +54,9 @@ const ShowStory = (props) => {
                                         
                                 </div>
                         </div>
+                        
                 </div>
-                    <div className="col s12 m4">
+             {props.match.path!=="/dashboard/:id" && <div className={classes.Poster}>
                         <div className="card center-align">
                             <div className="card-content">
                                 <span className="card-title">
@@ -80,7 +70,7 @@ const ShowStory = (props) => {
                                     </Link>
                             </div>
                         </div>
-                    </div>
+                    </div> }
               </div>)}
             
          </div>

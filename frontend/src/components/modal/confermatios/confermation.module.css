@@ -1,0 +1,17 @@
+.Message{
+    padding: 5px 10px;
+    color: white;
+}
+
+.Title{
+    padding: 0 10px;
+    color: white;
+}
+ .Button{
+    margin: 10px 10px;
+    background-color: red;
+} 
+.OkButton{
+    align-items: center;
+    margin: 10px 110px;
+} 

@@ -8,7 +8,7 @@ import Loading from "../Loading/Loading"
 
 
 
-const EditStory = () => {
+const EditStory = (props) => {
 
              
               const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const EditStory = () => {
             //   const currentUser=useSelector(state=>state.currentUser)
             //   const { user}= currentUser
        
-                        
+          //  console.log(props)            
               const{id}=useParams()
               
             //   const [title,setTitle]=useState("")

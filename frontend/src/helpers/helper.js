@@ -10,7 +10,7 @@
             }
             return str
           }
-          const stripTags= (input)=> {
+  const stripTags= (input)=> {
             return input.replace(/<(?:.|\n)*?>/gm, '')
   }
   

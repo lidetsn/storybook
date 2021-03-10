@@ -10,14 +10,29 @@ import 'materialize-css';
 import { Button,Select} from 'react-materialize';
 import {addStory} from "../../actions/storyAction"
 import {getCurrentUser} from "../../actions/authaction"
+import Modal from "../modal/Modal"
+import Confermation from "../modal/confermatios/Confermation"
+
+import { getUserStory } from "../../actions/storyAction"
+//import { getCurrentUser } from "../../actions/authaction"
 
 
 
 const AddStory = () => {
        const [formFields,setFormFields]=useState({title:"",body:"", status:"public"})
        const [error, setError]=useState(false)
+       const [addconfermed,setAddConfermed]=useState(false)
        const dispatch=useDispatch()
        const history=useHistory()
+
+
+    //    useEffect(() => {
+    //     dispatch(getUserStory())
+    //     dispatch(getCurrentUser())
+    //     //   dispatch(showAStory(story[0]._id))
+
+
+    // }, [])
     
         const handleChange=(e)=>{
 
@@ -37,16 +52,19 @@ const AddStory = () => {
              if(formFields.title !=="" && formFields.body !=="" && formFields.status !==""){
          
                 dispatch(addStory(formFields))
-                alert("your story has been added to your dashboard")
-                history.push("/dashboard")
-                // console.log("editor out put")
-                // console.log(formFields)
+                setAddConfermed(true)
+               
             }
             else{
                 setError(true)
             }
             
         }
+const confermed=()=>{
+                history.push("/dashboard")
+
+             
+}
         
     useEffect(()=>{
               dispatch(getCurrentUser())
@@ -54,6 +72,12 @@ const AddStory = () => {
     },[])
 
     return (
+        <>
+        <Modal show={addconfermed}>
+             <Confermation confermed={confermed}
+                                     message="YOUR POST HAS BEEN SUCCESSFULY POSTED"/>
+             
+        </Modal>
      <div className="container">
                <h3>Add Story</h3>
                {error &&<div class="card-panel">
@@ -108,6 +132,7 @@ const AddStory = () => {
             </div>
             
         </div>
+        </>
     )
 }
 

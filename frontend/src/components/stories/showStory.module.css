@@ -1,0 +1,95 @@
+/* @media screen and (min-width:639px){ */
+.PostedStory{
+    display: flex;
+    width: 100%;
+
+    /* margin: 20px 200px; */
+    /* border: 2px dotted greenyellow; */
+    
+}
+
+.List{
+    width: 30%;
+    padding: 10px 10px;
+    text-align: justify;
+    /* border: 1px solid red; */
+
+}
+
+
+.ShowStory{
+    display: flex;
+    width: 100%;
+    margin: 50px auto;
+    /* border: 1px solid red; */
+
+}
+
+
+.Poster{
+    width: 30%;
+    padding: 10px 40px;
+    /* border: 1px solid red; */
+
+}
+.Story{
+    width: 70%;
+    padding: 10px 10px;
+    color: gray;
+    text-align: justify;
+    /* padding: 10px 80px; */
+    
+    /* border: 1px solid red; */
+}
+.P{
+    padding: 15px;
+}
+
+
+
+.Active{
+    background-color: #C7C6C6;
+    color:  #CF8F2E;
+
+    padding: 10px;
+    box-shadow: 0 10px 6px #ccc;
+
+}
+ .PostedDate{
+     text-align: right;
+     background-color: #ECF3FF;
+     /* background-color: rgba(31, 4, 4, 0.755); */
+     color:lightgrey;
+     padding: 5px;
+ }
+ .Button{
+
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    border: white;
+    color: #966909;
+    font-family: inherit;
+    font-size: 1.2em;
+    }
+
+    .Header{
+        text-align: center;
+    }
+
+    @media screen and (max-width:769px){
+        .PostedStory{
+          
+            margin-top: 0px;           
+            
+        }
+        .List{
+            width: 100%;
+            padding: 10px;
+            text-align: justify;
+        }
+    } 
+    .ContentHeader{
+        background-color: #ECF3FF;
+
+    }

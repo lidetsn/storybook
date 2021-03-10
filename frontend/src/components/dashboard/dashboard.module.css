@@ -1,0 +1,87 @@
+@media screen and (min-width:669px){
+
+
+.PostedStory{
+    display: flex;
+  
+    width: 100%;
+    /* margin: 20px auto; */
+    box-sizing: content-box;
+    /* border: 1px solid red; */
+}
+
+.List{
+    width: 40%;
+    padding: 10px 5px;
+    /* border: 1px solid black; */
+}
+.Story{
+    margin-top: 60px;
+    width: 60%;
+    padding: 10px 20px;
+    color: gray;
+    text-align: justify;
+    /* border: 1px solid black; */
+}
+
+.Active{
+    background-color: #C7C6C6;
+    color:  #CF8F2E;
+
+    padding: 10px;
+    box-shadow: 0 10px 6px #ccc;
+
+}
+ .Info{
+     /* text-align: right; */
+     color:grey;
+     /* padding: 5px; */
+ }
+ .Button{
+
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    border: white;
+    color: #966909;
+    font-family: inherit;
+    font-size: 1.2em;
+    
+    }
+
+}
+@media screen and (max-width:769px){
+    .Visiblity{
+        display: none;
+    } 
+    .Button{
+        padding: 0px 0px;
+        align-content: center;
+        background-color: greenyellow;
+    }  
+    .PostedStory{
+        /* margin-top: 80px; */
+        width: 100%;
+        margin: 50px auto;
+        box-sizing: content-box;
+    }   
+}
+.Edit{
+    padding:0px 10px
+}
+
+table {
+  
+    /* border-collapse: collapse; */
+    width: 100%;
+  }
+  
+  td {
+    /* border: 1px solid #dddddd; */
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ECF3FF;
+  }

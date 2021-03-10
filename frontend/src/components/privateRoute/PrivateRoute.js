@@ -1,7 +1,7 @@
 import React from 'react'
 import {useSelector} from "react-redux"
 import { Redirect,Route } from 'react-router-dom'
-import Navbar from "../../components/navbar/Navbar"
+import NavbarTop from "../navbar/NavbarTop"
 
  
 const PrivateRoute=(props)=> {
@@ -16,7 +16,7 @@ const PrivateRoute=(props)=> {
                         {...rest}  render={props=>(
                                        isUserAutenticated? (
                                         <div>
-                                          <Navbar/>
+                                          <NavbarTop/>
                                           <Component {...props} />
                                          </div>            
                                          ) :

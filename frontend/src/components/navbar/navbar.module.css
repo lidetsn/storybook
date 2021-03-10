@@ -1,0 +1,42 @@
+
+  @media screen and (min-width:769px)  {
+    .Home{
+        padding:130px
+    }
+  }
+
+@media screen and (max-width:669px){
+    .DropDown{
+        
+  /* position: absolute; */
+  background-color: rgb(44, 44, 58);
+  /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  /* padding: 12px 16px; */
+  z-index: 1;
+  /* text-align: end; */
+  padding: 10px;
+    
+    }
+    .Sidenav li>a {
+   
+        color: blue;
+               
+    }
+}
+
+nav {
+    /* background-color: rgba(31, 4, 4, 0.755); */
+    background-color: #1877f2
+
+}
+
+.ProfileImage{
+    width: 55px;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+
+

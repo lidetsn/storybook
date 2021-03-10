@@ -20,11 +20,12 @@ const userStoryReducer=(state={story:[],isStoryLoading:true}, action)=>{
       
 }
 //reducer to get the story to edit form
-const editMyStoryReducer=(state={editStory:{},isloading:true}, action)=>{
+const editMyStoryReducer=(state={editStory:{},isloading:true,onEditState:false}, action)=>{
     switch(action.type){
         case "EDIT_A_STORY_SUCCESS":
                 return {
                    editStory:action.payload,
+                   onEditState:true,
                    isloading:false//i added this to controle preload of the form 
                 
                      
@@ -91,6 +92,16 @@ const storyReducer=(state={aStory:{},storyUser:{},loading:true}, action)=>{
       
 }
 
+// const updateStoryreducer=(state={updateInitiated:false},action)=>{
+//     switch(action.type){
+//         case "UPDATE_A_STORY_SUCCESS":
+//              return{ 
+//                  updateInitiated:true
+//              }
+//              default:
+//                 return state
+//     }
+// }
 
 export { userStoryReducer,storyReducer,allPostedStoriesReducer,editMyStoryReducer}
 
